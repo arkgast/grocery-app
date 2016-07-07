@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -17,6 +11,8 @@ import ListItem from './components/ListItems';
 import StatusBar from './components/StatusBar';
 import styles from './styles';
 
+import Database from 'rn-firebase-bridge/database';
+
 
 class GroceryApp extends Component {
   constructor(props) {
@@ -26,13 +22,13 @@ class GroceryApp extends Component {
         rowHasChanged: (row1, row2) => row1 !== row2,
       })
     };
+    this.itemsRef = Database.ref();
   }
   componentDidMount() {
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows([{
-        title: 'Pizza'
-      }])
+      dataSource: this.state.dataSource.cloneWithRows([{ title: 'Loading...' }])
     });
+    this.listenForItems(this.itemsRef);
   }
   renderItem(item) {
     return (
@@ -47,9 +43,24 @@ class GroceryApp extends Component {
           dataSource={this.state.dataSource}
           renderRow={this.renderItem.bind(this) }
           style={styles.listview} />
-        <ActionButton title="Add" />
+        <ActionButton title="Add" onPress={this.addFood.bind(this)} />
       </View>
     );
+  }
+  listenForItems(itemsRef) {
+    const ref = Database.ref();
+    let items = [];
+    ref.on('value', async (snapshot) => {
+      await snapshot.forEach(async (child) => {
+        items.push(await child.val());
+      });
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(items),
+      });
+    });
+  }
+  addFood() {
+    alert('Add food');
   }
 }
 
