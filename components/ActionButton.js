@@ -15,9 +15,7 @@ class ActionButton extends Component {
         <TouchableHighlight 
           underlayColor={constants.actionColor}
           activeOpacity={0.8}
-          onPress={() => {
-            alert('Yeah!');
-          }}>
+          onPress={this.props.onPress}>
           <View style={styles.actionTextWrapper}>
             <Text style={styles.actionText}>{this.props.title}</Text>
           </View>
