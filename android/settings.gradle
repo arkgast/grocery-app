@@ -1,3 +1,5 @@
 rootProject.name = 'GroceryApp'
 
 include ':app'
+include ':rn-firebase-bridge'
+project(':rn-firebase-bridge').projectDir = new File(rootProject.projectDir, '../node_modules/rn-firebase-bridge/android')
