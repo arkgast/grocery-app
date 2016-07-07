@@ -12,12 +12,15 @@ import {
 } from 'react-native';
 
 import ActionButton from './components/ActionButton';
+import ListItem from './components/ListItems';
+import StatusBar from './components/StatusBar';
 
 class GroceryApp extends Component {
   render() {
     return (
       <View>
-        <ActionButton title="ReactNativeRocks"></ActionButton>
+        <ActionButton title="ReactNativeRocks" />
+        <StatusBar title="JS" />
       </View>
     );
   }
