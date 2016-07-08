@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  ToastAndroid,
   TouchableHighlight,
   Text,
   TextInput,
@@ -13,17 +14,18 @@ class ActionSection extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: 'Add an item'
+      text: ''
     };
   }
   render() {
     return (
       <View style={styles.actionSection}>
         <TextInput 
+          editable={true}
+          onChangeText={this.changeText.bind(this)}
+          placeholder={'Add an Item'}
           style={styles.actionInput}
           value={this.state.text}
-          onChangeText={this.changeText.bind(this)}
-          editable={true}
           />
         <View style={styles.actionButton}>
           <TouchableHighlight 
@@ -45,7 +47,15 @@ class ActionSection extends Component {
   }
   handleAdd() {
     const title = this.state.text;
-    this.props.addFood(title);
+    if (title !== '')
+    {
+      this.props.addFood(title);
+      this.setState({
+        text: ''
+      });
+    } else {
+      ToastAndroid.show('Please enter an item', ToastAndroid.SHORT);
+    }
   }
 }
 
