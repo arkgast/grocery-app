@@ -44,14 +44,15 @@ class GroceryApp extends Component {
           dataSource={this.state.dataSource}
           renderRow={this.renderItem.bind(this) }
           style={styles.listview} />
-        <ActionSection title="Add" onPress={this.addFood.bind(this)} />
+        <ActionSection title="Add" addFood={this.handleCreate.bind(this)} />
       </View>
     );
   }
   listenForItems(itemsRef) {
-    const ref = Database.ref();
-    let items = [];
+    const ref = Database.ref().child('items');
+    let items = null;
     ref.on('value', async (snapshot) => {
+      items = [];
       await snapshot.forEach(async (child) => {
         items.push(await child.val());
       });
@@ -60,16 +61,9 @@ class GroceryApp extends Component {
       });
     });
   }
-  addFood() {
-    Alert.alert(
-      'Alert Title',
-      'My Alert Msg',
-      [
-        {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-        {text: 'OK', onPress: () => console.log('OK Pressed')},
-      ]
-    )
+  handleCreate(title) {
+    const item = this.itemsRef.child('items').push();
+    item.setValue({title: title});
   }
 }
 

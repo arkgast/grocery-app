@@ -22,13 +22,14 @@ class ActionSection extends Component {
         <TextInput 
           style={styles.actionInput}
           value={this.state.text}
+          onChangeText={this.changeText.bind(this)}
           editable={true}
           />
         <View style={styles.actionButton}>
           <TouchableHighlight 
             underlayColor={constants.actionColor}
             activeOpacity={0.8}
-            onPress={this.props.onPress}>
+            onPress={this.handleAdd.bind(this)}>
             <View style={styles.actionButtonText}>
               <Text style={styles.actionText}>{this.props.title}</Text>
             </View>
@@ -36,6 +37,15 @@ class ActionSection extends Component {
         </View>
       </View>
     );
+  }
+  changeText(text) {
+    this.setState({
+      text: text
+    });
+  }
+  handleAdd() {
+    const title = this.state.text;
+    this.props.addFood(title);
   }
 }
 
