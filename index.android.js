@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {
+  Alert,
   AppRegistry,
   ListView,
   Text,
   View
 } from 'react-native';
 
-import ActionButton from './components/ActionButton';
+import ActionSection from './components/ActionSection';
 import ListItem from './components/ListItems';
 import StatusBar from './components/StatusBar';
 import styles from './styles';
@@ -43,7 +44,7 @@ class GroceryApp extends Component {
           dataSource={this.state.dataSource}
           renderRow={this.renderItem.bind(this) }
           style={styles.listview} />
-        <ActionButton title="Add" onPress={this.addFood.bind(this)} />
+        <ActionSection title="Add" onPress={this.addFood.bind(this)} />
       </View>
     );
   }
@@ -60,7 +61,15 @@ class GroceryApp extends Component {
     });
   }
   addFood() {
-    alert('Add food');
+    Alert.alert(
+      'Alert Title',
+      'My Alert Msg',
+      [
+        {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ]
+    )
   }
 }
 
