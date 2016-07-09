@@ -48,6 +48,7 @@ var styles = StyleSheet.create({
   },
   actionSection: {
     flexDirection: 'row',
+    paddingTop: 1,
   },
   actionInput: {
     flex: 3,

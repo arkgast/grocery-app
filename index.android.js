@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Alert,
   AppRegistry,
   ListView,
   Text,
@@ -33,7 +32,7 @@ class GroceryApp extends Component {
   }
   renderItem(item) {
     return (
-      <ListItem item={item} onPress={() => {}}/>
+      <ListItem item={item} handleComplete={this.handleComplete.bind(this)}/>
     );
   }
   render() {
@@ -64,6 +63,11 @@ class GroceryApp extends Component {
   handleCreate(title) {
     const item = this.itemsRef.child('items').push();
     item.setValue({title: title});
+  }
+  handleComplete(title) {
+    const items = this.itemsRef.child('items');
+    const item = items.limitToFirst(1);
+    console.log(item);
   }
 }
 

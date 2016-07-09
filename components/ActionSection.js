@@ -6,6 +6,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import dismissKeyboard from 'dismissKeyboard';
 
 import styles, { constants } from '../styles';
 
@@ -20,13 +21,12 @@ class ActionSection extends Component {
   render() {
     return (
       <View style={styles.actionSection}>
-        <TextInput 
-          editable={true}
-          onChangeText={this.changeText.bind(this)}
-          placeholder={'Add an Item'}
-          style={styles.actionInput}
-          value={this.state.text}
-          />
+          <TextInput 
+            editable={true}
+            onChangeText={this.changeText.bind(this)}
+            placeholder={'Add an Item'}
+            style={styles.actionInput}
+            value={this.state.text} />
         <View style={styles.actionButton}>
           <TouchableHighlight 
             underlayColor={constants.actionColor}
@@ -53,6 +53,7 @@ class ActionSection extends Component {
       this.setState({
         text: ''
       });
+      dismissKeyboard();
     } else {
       ToastAndroid.show('Please enter an item', ToastAndroid.SHORT);
     }
