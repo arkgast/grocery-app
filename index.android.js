@@ -6,12 +6,12 @@ import {
   View
 } from 'react-native';
 
+import Database from 'rn-firebase-bridge/database';
+
 import ActionSection from './components/ActionSection';
 import ListItem from './components/ListItems';
 import StatusBar from './components/StatusBar';
 import styles from './styles';
-
-import Database from 'rn-firebase-bridge/database';
 
 
 class GroceryApp extends Component {
@@ -28,7 +28,7 @@ class GroceryApp extends Component {
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows([{ title: 'Loading...' }])
     });
-    this.listenForItems(this.itemsRef);
+    this.listenForItems();
   }
   renderItem(item) {
     return (
@@ -47,16 +47,20 @@ class GroceryApp extends Component {
       </View>
     );
   }
-  listenForItems(itemsRef) {
-    const ref = Database.ref().child('items');
-    let items = null;
+  listenForItems() {
+    const ref = this.itemsRef.child('items');
+    let listItems = null;
     ref.on('value', async (snapshot) => {
-      items = [];
-      await snapshot.forEach(async (child) => {
-        items.push(await child.val());
-      });
+      listItems = [];
+      const items = await snapshot.val();
+      for (key in items) {
+        listItems.push({
+          key: key,
+          title: items[key].title
+        });
+      }
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(items),
+        dataSource: this.state.dataSource.cloneWithRows(listItems),
       });
     });
   }
@@ -64,10 +68,9 @@ class GroceryApp extends Component {
     const item = this.itemsRef.child('items').push();
     item.setValue({title: title});
   }
-  handleComplete(title) {
-    const items = this.itemsRef.child('items');
-    const item = items.limitToFirst(1);
-    console.log(item);
+  handleComplete(itemKey) {
+    const itemRef = this.itemsRef.child('items').child(itemKey);
+    itemRef.remove();
   }
 }
 

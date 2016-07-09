@@ -30,8 +30,8 @@ class ListItem extends Component {
         {
           text: 'Complete',
           onPress: () => {
-            const item = this.props.item.title;
-            this.props.handleComplete(item);
+            const itemKey = this.props.item.key;
+            this.props.handleComplete(itemKey);
           }
         },
       ],
