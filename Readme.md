@@ -1,5 +1,7 @@
 # Grocery App
 
-*ReactNative, Firebase*
+Demo app to test [ReactNative](https://facebook.github.io/react-native/) with [Firebase](https://console.firebase.google.com)
 
-Download *google-services.json* from firebase console and save it into android/app/
+In order to integrate Firebase I've to use a [Firebase Bridge](https://github.com/davecoates/rn-firebase-bridge) that is awesome.
+
+To use your own Firebase Database follow the steps described [here](https://firebase.google.com/docs/android/setup).
