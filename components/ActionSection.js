@@ -21,12 +21,12 @@ class ActionSection extends Component {
   render() {
     return (
       <View style={styles.actionSection}>
-          <TextInput 
-            editable={true}
-            onChangeText={this.changeText.bind(this)}
-            placeholder={'Add an Item'}
-            style={styles.actionInput}
-            value={this.state.text} />
+        <TextInput 
+          editable={true}
+          onChangeText={this.changeText.bind(this)}
+          placeholder={'Add an Item'}
+          style={styles.actionInput}
+          value={this.state.text} />
         <View style={styles.actionButton}>
           <TouchableHighlight 
             underlayColor={constants.actionColor}

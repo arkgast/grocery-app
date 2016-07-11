@@ -28,6 +28,42 @@ var styles = StyleSheet.create({
     color: '#333',
     fontSize: 16,
   },
+  liEditing: {
+    backgroundColor: '#f9f9f9',
+    borderColor: 'transparent',
+    borderWidth: 0,
+    flexDirection: 'row',
+    paddingBottom: 3,
+    paddingTop: 2,
+  },
+  liTextEditing: {
+    flex: 3,
+  },
+  editButtons: {
+    flex: 2,
+    flexDirection: 'row',
+  },
+  editButton: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textEditButtonOk: {
+    backgroundColor: '#039BE5',
+    borderRadius: 90,
+    height: 48,
+    width: 48,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textEditButtonCancel: {
+    backgroundColor: '#ff5252',
+    borderRadius: 90,
+    height: 48,
+    width: 48,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   navbar: {
     alignItems: 'center',
     backgroundColor: '#fff',

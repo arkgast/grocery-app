@@ -32,7 +32,10 @@ class GroceryApp extends Component {
   }
   renderItem(item) {
     return (
-      <ListItem item={item} handleComplete={this.handleComplete.bind(this)}/>
+      <ListItem
+        item={item}
+        handleComplete={this.handleComplete.bind(this)}
+        handleEdit={this.handleEdit.bind(this)} />
     );
   }
   render() {
@@ -71,6 +74,10 @@ class GroceryApp extends Component {
   handleComplete(itemKey) {
     const itemRef = this.itemsRef.child('items').child(itemKey);
     itemRef.remove();
+  }
+  handleEdit(itemKey, newTitle) {
+    const itemRef = this.itemsRef.child('items').child(itemKey);
+    itemRef.setValue({title: newTitle});
   }
 }
 
